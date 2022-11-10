@@ -1,19 +1,29 @@
-program tarea_1;
+program PROBLEMA_1_TP9;
 {$codepage utf8}
 var
-    numero:integer; resultado:real;
+    numero,mayor:integer;
 
-function factorial(n:integer):real;
-    
-    begin
-    if (n=0) then
-        factorial:=1
+function digito_mas_significativo(num:integer):integer;
+   var
+        division,resto,ultimo:integer;
+   begin
+    if(num div 10=0)then
+        digito_mas_significativo:=num
     else
-        factorial:=n*factorial(n-1);
+        begin
+        division:=num div 10;
+        ultimo:=digito_mas_significativo(division);
+        resto:=num MOD 10;
+        if (resto > ultimo)then
+            digito_mas_significativo:=resto
+        else
+            digito_mas_significativo:=ultimo;
+        end;
+        
     end;
 
 begin
-    write('Ingrese un número: ');readln(numero);
-    resultado:=factorial(numero);
-    write(' ',numero,'! = ',resultado);
+    write('Ingrese un número entero: ');readln(numero);
+    mayor:=digito_mas_significativo(numero);
+    write('EL digito más significativo es: ', mayor);
 end.
